@@ -1,16 +1,11 @@
-"""
-URL configuration for my_stor project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-"""
+# my_stor/urls.py
 
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('store.urls')),             # صفحة المتجر الرئيسية
-    path('cart/', include('cart.urls')),         # روابط السلة
-    path('customers/', include('customers.urls'))  # تسجيل الدخول / العملاء
+    path('', include('store.urls')),
+    path('cart/', include('cart.urls')),  # يتضمن cart1/
+    path('customers/', include('customers.urls')),
 ]

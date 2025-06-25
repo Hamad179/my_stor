@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,15 +7,22 @@
     <style>
         body {
             font-family: 'Tahoma', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            background-image: url("{% static 'sasas.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
         }
 
         main {
             max-width: 1200px;
             margin: auto;
             padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.93);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
         h2 {

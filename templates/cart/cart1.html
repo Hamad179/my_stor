@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>السلة</title>
+    <style>
+        body {
+            font-family: 'Tahoma';
+            padding: 2rem;
+            background: #fff8f0;
+        }
+        .cart-item {
+            background: #fff;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .cart-item h3 {
+            margin: 0 0 0.5rem 0;
+        }
+        .price {
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛒 سلة المشتريات</h1>
+    {% if cart_items %}
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <h3>{{ item.name }}</h3>
+                <div class="price">{{ item.price }} ر.س</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>السلة فارغة حالياً.</p>
+    {% endif %}
+</body>
+</html>
