@@ -17,19 +17,21 @@
     <span style="color: white; font-size: 1.5rem; font-weight: bold;">سلتكم</span>
   </div>
 
-  <!-- روابط التنقل -->
-  <nav>
-    <a href="/" style="margin-left: 20px; color: white; text-decoration: none; font-weight: bold; font-size: 1rem;">
-      الرئيسية
-    </a>
-    <a href="/cart/cart1/" style="margin-left: 20px; color: white; text-decoration: none; font-weight: bold; font-size: 1rem;">
-      السلة
-    </a>
-    <a href="/customers/" style="margin-left: 20px; color: white; text-decoration: none; font-weight: bold; font-size: 1rem;">
-      حسابي
-    </a>
-    <a href="/about/" style="color: white; text-decoration: none; font-weight: bold; font-size: 1rem;">
-      من نحن
-    </a>
+  <!-- روابط التنقل الرئيسية -->
+  <nav style="display: flex; align-items: center; gap: 20px;">
+    <a href="/" style="color: white; text-decoration: none; font-weight: bold;">الرئيسية</a>
+    <a href="/cart/cart1/" style="color: white; text-decoration: none; font-weight: bold;">السلة</a>
+    <a href="/about/" style="color: white; text-decoration: none; font-weight: bold;">من نحن</a>
   </nav>
+
+  <!-- روابط الدخول -->
+  <div style="display: flex; align-items: center; gap: 15px;">
+    <a href="{% url 'login' %}" style="background: white; color: #f7931e; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+    تسجيل الدخول
+    </a>
+
+    <a href="/signup/" style="color: #333; background-color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+      إنشاء حساب
+    </a>
+  </div>
 </header>
