@@ -9,7 +9,9 @@
     align-items: center;
     font-family: 'Segoe UI', Tahoma, sans-serif;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    flex-wrap: wrap;
 ">
+
   <!-- الشعار على اليمين -->
   <div style="display: flex; align-items: center; gap: 10px;">
     <img src="{% static 'photo.png' %}" alt="شعار سلتكم"
@@ -21,17 +23,38 @@
   <nav style="display: flex; align-items: center; gap: 20px;">
     <a href="/" style="color: white; text-decoration: none; font-weight: bold;">الرئيسية</a>
     <a href="/cart/cart1/" style="color: white; text-decoration: none; font-weight: bold;">السلة</a>
-    <a href="/about/" style="color: white; text-decoration: none; font-weight: bold;">من نحن</a>
+    <a href="{% url 'about' %}" style="color: white; text-decoration: none; font-weight: bold; font-size: 1rem;">من نحن</a>
   </nav>
+
+  <!-- مربع البحث -->
+  <form action="/search/" method="GET" style="display: flex; align-items: center; gap: 5px;">
+    <input type="text" name="q" placeholder="ابحث..." style="
+        padding: 6px 12px;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        width: 160px;
+    ">
+    <button type="submit" style="
+        background-color: white;
+        color: #f7931e;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 50%;
+        font-weight: bold;
+        cursor: pointer;
+    ">🔍</button>
+  </form>
 
   <!-- روابط الدخول -->
   <div style="display: flex; align-items: center; gap: 15px;">
     <a href="{% url 'login' %}" style="background: white; color: #f7931e; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-    تسجيل الدخول
+      تسجيل الدخول
     </a>
 
     <a href="/signup/" style="color: #333; background-color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: bold;">
       إنشاء حساب
     </a>
   </div>
+
 </header>

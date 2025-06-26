@@ -29,3 +29,7 @@ def register_view(request):
         print(f"تم طلب إنشاء حساب: {username} - {email}")
         # لاحقًا يمكن إضافة إنشاء مستخدم فعلي
     return render(request, 'cart/register.html')
+
+
+def about_view(request):
+    return render(request, 'cart/about.html')
