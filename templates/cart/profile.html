@@ -1,0 +1,11 @@
+<!-- cart/profile.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="padding: 2rem;">
+    <h2>الملف الشخصي</h2>
+    <p>الاسم: {{ request.user.get_full_name }}</p>
+    <p>اسم المستخدم: {{ request.user.username }}</p>
+    <p>البريد الإلكتروني: {{ request.user.email }}</p>
+  </div>
+{% endblock %}

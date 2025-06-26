@@ -1,6 +1,8 @@
 # cart/views.py
 
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 
 def cart_view(request):
     # قائمة مؤقتة - لاحقًا يمكن ربطها بـ session
@@ -33,3 +35,8 @@ def register_view(request):
 
 def about_view(request):
     return render(request, 'cart/about.html')
+
+
+@login_required
+def profile_view(request):
+    return render(request, 'cart/profile.html')

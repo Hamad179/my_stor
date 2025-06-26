@@ -1,67 +1,97 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>إنشاء حساب جديد</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(to bottom right, #f7931e, #ffb347);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .register-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            width: 360px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        h2 {
-            text-align: center;
-            color: #f7931e;
-        }
-        label, input {
-            display: block;
-            width: 100%;
-            margin-top: 1rem;
-        }
-        input {
-            padding: 0.7rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        button {
-            margin-top: 1.5rem;
-            background-color: #f7931e;
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-            width: 100%;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #e67e22;
-        }
-    </style>
-</head>
-<body>
-    <div class="register-box">
-        <h2>إنشاء حساب جديد</h2>
-        <form method="post">
-            {% csrf_token %}
-            <label>اسم المستخدم:</label>
-            <input type="text" name="username" required>
-            <label>البريد الإلكتروني:</label>
-            <input type="email" name="email" required>
-            <label>كلمة المرور:</label>
-            <input type="password" name="password" required>
-            <button type="submit">تسجيل</button>
-        </form>
+{% load static %}
+
+<style>
+  .register-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 350px;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background-color: #f7931e;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+
+<body style="background-color: #f7931e; font-family: 'Segoe UI', Tahoma, sans-serif;">
+
+  <form method="POST" class="register-card">
+    {% csrf_token %}
+    <h2 style="text-align: center; color: #f7931e;">إنشاء حساب جديد</h2>
+
+    <!-- اسم المستخدم -->
+    <div class="form-group">
+      <label>اسم المستخدم:</label>
+      <input type="text" name="username" required>
     </div>
+
+    <!-- البريد -->
+    <div class="form-group">
+      <label>البريد الإلكتروني:</label>
+      <input type="email" name="email" required>
+    </div>
+
+    <!-- كلمة المرور -->
+    <div class="form-group">
+      <label>كلمة المرور:</label>
+      <input type="password" name="password" id="password" required>
+      <span class="toggle-password" onclick="togglePassword('password', this)">👁️‍🗨️</span>
+    </div>
+
+    <!-- تأكيد كلمة المرور -->
+    <div class="form-group">
+      <label>تأكيد كلمة المرور:</label>
+      <input type="password" name="confirm_password" id="confirm_password" required>
+      <span class="toggle-password" onclick="togglePassword('confirm_password', this)">👁️‍🗨️</span>
+    </div>
+
+    <!-- زر -->
+    <button type="submit" class="submit-btn">تسجيل</button>
+  </form>
+
+  <script>
+    function togglePassword(id, icon) {
+      const input = document.getElementById(id);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "🙈";
+      } else {
+        input.type = "password";
+        icon.textContent = "👁️‍🗨️";
+      }
+    }
+  </script>
+
 </body>
-</html>
