@@ -2,6 +2,9 @@
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from .models import CartItem
 
 
 def cart_view(request):
@@ -40,3 +43,24 @@ def about_view(request):
 @login_required
 def profile_view(request):
     return render(request, 'cart/profile.html')
+
+
+@login_required
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('/')  # إعادة التوجيه إلى الصفحة الرئيسية
+    return render(request, 'cart/logout.html')
+
+@login_required
+def cart_view(request):
+    items = CartItem.objects.filter(user=request.user)
+    total = sum(item.product.price * item.quantity for item in items)
+    tax = total * 0.15  # ضريبة 15% مثلاً
+    grand_total = total + tax
+    return render(request, 'cart/cart1.html', {
+        'cart_items': items,
+        'total': total,
+        'tax': tax,
+        'grand_total': grand_total
+    })

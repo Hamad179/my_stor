@@ -1,90 +1,168 @@
 {% load static %}
 
-<!-- templates/header.html -->
-<header style="
-  direction: rtl;
-  background: linear-gradient(90deg, #f7931e, #ffb347);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-">
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>سلتكم</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
 
-  <!-- الشعار -->
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <img src="{% static 'photo.png' %}" alt="شعار سلتكم"
-         style="height: 60px; width: 60px; border-radius: 50%; border: 2px solid white;">
-    <span style="color: white; font-size: 1.5rem; font-weight: bold;">سلتكم</span>
+    header {
+      direction: rtl;
+      background: linear-gradient(90deg, #2c3e50, #4a6491);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a:hover,
+    .dropdown:hover > a {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 180px;
+      display: none;
+      z-index: 100;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .account-dropdown {
+      left: 0;
+      right: auto;
+    }
+
+    @media (max-width: 992px) {
+      #mobile-menu-btn {
+        display: block;
+      }
+
+      nav {
+        display: none !important;
+      }
+
+      .search-form {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="display: flex; align-items: center; gap: 30px;">
+    <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+      <img src="{% static 'photo.png' %}" alt="شعار المتجر"
+           style="height: 50px; width: 50px; border-radius: 50%; border: 2px solid #fff;">
+      <span style="color: white; font-size: 1.5rem; font-weight: bold; font-family: 'Arial', sans-serif;">سلتكم</span>
+    </a>
+
+    <nav style="display: flex; gap: 15px;">
+      <a href="/" style="color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px; transition: all 0.3s; font-size: 0.95rem;">الرئيسية</a>
+      <div class="dropdown" style="position: relative;">
+        <a href="#" style="color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px; transition: all 0.3s; font-size: 0.95rem;">المنتجات ▼</a>
+        <div class="dropdown-content">
+          <a href="#" style="display: block; padding: 10px 15px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">الأقسام</a>
+          <a href="#" style="display: block; padding: 10px 15px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">العروض</a>
+          <a href="#" style="display: block; padding: 10px 15px; color: #333; text-decoration: none;">الأكثر مبيعاً</a>
+        </div>
+      </div>
+      <a href="{% url 'about' %}" style="color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px; transition: all 0.3s; font-size: 0.95rem;">من نحن</a>
+      <a href="#" style="color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px; transition: all 0.3s; font-size: 0.95rem;">اتصل بنا</a>
+    </nav>
   </div>
 
-  <!-- روابط التنقل -->
-  <nav style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-    <a href="/" style="color: white; text-decoration: none; font-weight: bold;">الرئيسية</a>
-    <a href="/cart/cart1/" style="color: white; text-decoration: none; font-weight: bold;">السلة</a>
-    <a href="{% url 'about' %}" style="color: white; text-decoration: none; font-weight: bold;">من نحن</a>
-    {% if user.is_authenticated %}
-      <a href="{% url 'profile' %}" style="color: white; text-decoration: none; font-weight: bold;">الملف الشخصي</a>
-    {% endif %}
-  </nav>
+  <div style="display: flex; align-items: center; gap: 20px;">
+    <button id="mobile-menu-btn" style="display: none; background: none; border: none; color: white; font-size: 1.5rem;">☰</button>
 
-  <!-- البحث -->
-  <form action="/search/" method="GET" style="
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 10px;
-  ">
-    <input type="text" name="q" placeholder="ابحث..." style="
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: none;
-      outline: none;
-      width: 160px;
-    ">
-    <button type="submit" style="
-      background-color: white;
-      color: #f7931e;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 50%;
-      font-weight: bold;
-      cursor: pointer;
-    ">🔍</button>
-  </form>
+    <form action="/search/" method="GET" class="search-form" style="position: relative;">
+      <input type="text" name="q" placeholder="ابحث عن منتجات..." style="
+          padding: 10px 15px;
+          padding-left: 40px;
+          border-radius: 30px;
+          border: none;
+          outline: none;
+          width: 250px;
+          font-size: 0.9rem;
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+      ">
+      <button type="submit" style="
+          position: absolute;
+          left: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          color: #666;
+          cursor: pointer;
+      ">🔍</button>
+    </form>
 
-  <!-- روابط الحساب -->
-  <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-    {% if user.is_authenticated %}
-      <a href="#" style="
-        background-color: white;
-        color: #f7931e;
-        padding: 8px 16px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-      ">تسجيل الخروج</a>
-    {% else %}
-      <a href="{% url 'login' %}" style="
-        background-color: white;
-        color: #f7931e;
-        padding: 8px 16px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-      ">تسجيل الدخول</a>
+    <div style="display: flex; gap: 15px;">
+      <a href="/wishlist/" style="color: white; font-size: 1.3rem; text-decoration: none;">❤️</a>
+      <a href="{% url 'cart1' %}"  style="color: white; font-size: 1.3rem; text-decoration: none; position: relative;">
+        🛒
+        <span style="position: absolute; top: -8px; left: -8px; background: #ff4757; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">3</span>
+      </a>
 
-      <a href="/signup/" style="
-        color: #333;
-        background-color: white;
-        padding: 8px 16px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-      ">إنشاء حساب</a>
-    {% endif %}
+      {% if user.is_authenticated %}
+      <div class="dropdown" style="position: relative; display: inline-block;">
+        <button id="account-btn" style="background: none; border: none; cursor: pointer;">
+          <img src="{% static 'man.png' %}" alt="حسابي"
+               style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid white;">
+        </button>
+        <div id="account-dropdown" class="dropdown-content account-dropdown">
+          <a href="{% url 'profile' %}" style="display: block; padding: 10px 15px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">ملفي الشخصي</a>
+          <a href="#" style="display: block; padding: 10px 15px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">طلباتي</a>
+          <a href="{% url 'logout' %}" style="display: block; padding: 10px 15px; color: #333; text-decoration: none;">تسجيل الخروج</a>
+        </div>
+      </div>
+      {% else %}
+      <a href="{% url 'login' %}" style="color: white; text-decoration: none; font-weight: bold; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 4px;">تسجيل الدخول</a>
+      {% endif %}
+    </div>
   </div>
-
 </header>
+
+<script>
+  document.getElementById('account-btn')?.addEventListener('click', function (e) {
+    e.stopPropagation();
+    const dropdown = document.getElementById('account-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+      dropdown.style.display = 'none';
+    });
+  });
+
+  document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+    dropdown.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+  });
+</script>
+
+</body>
+</html>

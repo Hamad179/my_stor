@@ -4,6 +4,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from .views import profile_view
+from .views import logout_view
 
 
 urlpatterns = [
@@ -13,4 +14,7 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('about/', views.about_view, name='about'),
     path('profile/', profile_view, name='profile'),
+    path('logout/', logout_view, name='logout'),
+    path('cart/', views.cart_view, name='cart'),
+
 ]
